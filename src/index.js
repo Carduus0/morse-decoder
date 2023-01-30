@@ -38,8 +38,24 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    let arrTens;
+    let res =[];
+    function chunkingForTen(a){
+      arrTens =(a.match(/.{1,10}/g));
+      return arrTens
+    }; 
+    chunkingForTen(expr); 
+
+   arrTens.forEach(chunk => {
+    let translate = chunk.replace(/10/g,'.').replace(/11/g, '-').replace(/00/g, '');
+    if(translate =='**********'){
+     res.push(' ')
+      }res.push(MORSE_TABLE[translate]);
+   });
+   return res.join('')
+};
+
+//decode("00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010")
 
 module.exports = {
     decode
